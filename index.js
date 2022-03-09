@@ -3,7 +3,8 @@ const start=document.getElementById('start');
 const score=document.getElementById('score');
 let currentSnake=[2,1,0]
 let squares=[];
-let direction=1;
+let direction=1; 
+let width=20;
 function createGrid(){
     for(i=0; i<400; i++){
         const square=document.createElement('div');
@@ -29,3 +30,24 @@ function move(){
 
 }
 move();
+let timerId=setInterval(move,500);
+function control(event){
+    if(event.keyCode===39){
+    console.log("right");
+    direction=1;
+}
+else if(event.keyCode===38){
+console.log("up");
+direction=-width;
+}
+else if (event.keyCode===37){
+    console.log("left");
+    direction=-1;
+
+}
+else if (event.keyCode===40){
+    console.log("down");
+    direction=+width;
+}
+}
+document.addEventListener('keyup',control);

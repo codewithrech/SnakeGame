@@ -14,8 +14,9 @@ body{
 .square{
     width:20px;
     height:20px;
+    background-color:green;
 }
 .snake{
-    background-color:green;
+    background-color:yellowgreen;
     border-radius: 4px;
 }
