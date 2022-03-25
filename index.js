@@ -21,11 +21,9 @@ function createGrid(){
 createGrid()
 console.log(squares);
 currentSnake.forEach(index=>squares[index].classList.add('snake'));
-// function StartGame(){
-//     let timerId=setInterval(move, intervalTime);
-// }
-
-
+function startGame() {
+timerId = setInterval(move, intervalTime)
+}
 function move(){
     if(
         (currentSnake[0] + width >= width*width && direction === width) || //if snake has hit bottom
@@ -80,9 +78,7 @@ squares[currentSnake[0]].classList.add('snake');
 // 38 is for the up arrow
 // 37 is for the left arrow
 // 40 is for the down arrow
-move()
 
-let timerId = setInterval(move, intervalTime)
 function generateApples() {
     do {
         //generate a random number
@@ -111,4 +107,4 @@ else if (event.keyCode===40){
 }
 }
 document.addEventListener('keydown',control);
-//startButton.addEventListener('click'.startGame);
+startButton.addEventListener('click', startGame)
