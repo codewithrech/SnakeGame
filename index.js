@@ -1,11 +1,14 @@
 const grid= document.querySelector('.grid');
-const start=document.getElementById('start');
-const score=document.getElementById('score');
+const startButton=document.getElementById('start');
+const scoreDisplay=document.getElementById('score');
 let currentSnake=[2,1,0]
 let squares=[];
 let direction=1; 
 let width=20;
 let appleIndex=0;
+let score=0;
+let intervalTime=1000;
+let speed =1;
 function createGrid(){
     for(i=0; i<400; i++){
         const square=document.createElement('div');
@@ -18,16 +21,27 @@ function createGrid(){
 createGrid()
 console.log(squares);
 currentSnake.forEach(index=>squares[index].classList.add('snake'));
+// function StartGame(){
+//     let timerId=setInterval(move, intervalTime);
+// }
+
+
 function move(){
     if(
-        (currentSnake[0] + width>=100 && direction===width)||
-        (currentSnake[0] % width ===width-1 && direction==1)||
-        (currentSnake [0] % width ===0 && direction===-1)||
-        (currentSnake[0]- width<0 && direction ===-width)||
-        squares[currentSnake[0]+direction].classList.contains('snake')
-
-
+        (currentSnake[0] + width >= width*width && direction === width) || //if snake has hit bottom
+        (currentSnake[0] % width === width-1 && direction === 1) || //if snake has hit right wall
+        (currentSnake[0] % width === 0 && direction === -1) || //if snake has hit left wall
+        (currentSnake[0] - width < 0 && direction === -width) || //if snake has hit top
+        squares[currentSnake[0] + direction].classList.contains('snake')
     )
+        // (currentSnake[0] + width>=100 && direction===width)||
+        // (currentSnake[0] % width ===width-1 && direction==1)||
+        // (currentSnake [0] % width ===0 && direction===-1)||
+        // (currentSnake[0]- width<0 && direction ===-width)||
+        // squares[currentSnake[0]+direction].classList.contains('snake')
+
+
+    
      
     return clearInterval(timerId)
     const tail=currentSnake.pop();
@@ -36,15 +50,39 @@ function move(){
     squares[tail].classList.remove('snake');
    currentSnake.unshift(currentSnake[0] +direction);
    console.log(currentSnake);
-    squares[currentSnake[0]].classList.add('snake');
+   // deal with snake head gettinng the apple
+   // deal with snake head fets apple 
+
+   if (squares[currentSnake[0]].classList.contains("apple")){
+
+
+// remove the class of apple 
+squares[currentSnake[0]].classList.remove('apple');
+// growing our snake by adding class of snake to it 
+squares[tail].classList.add("snake");
+// grow our snake array 
+currentSnake.push(tail);
+//generate new apple
+generateApples();
+// add one to the score 
+score++;
+//diplay our score
+scoreDisplay.textContent=score;
+// speed up our snake
+clearInterval(timerId);
+intervalTime = intervalTime * speed;
+timerId = setInterval(move, intervalTime);
+   }
+squares[currentSnake[0]].classList.add('snake');
 }
 
 // 39 is right arrow
 // 38 is for the up arrow
 // 37 is for the left arrow
 // 40 is for the down arrow
-move();
-let timerId=setInterval(move,500);
+move()
+
+let timerId = setInterval(move, intervalTime)
 function generateApples() {
     do {
         //generate a random number
@@ -52,7 +90,7 @@ function generateApples() {
     } while (squares[appleIndex].classList.contains('snake'))
     squares[appleIndex].classList.add('apple')
 }
-generateApples()
+generateApples() 
 function control(event){
     if(event.keyCode===39){
     console.log("right");
@@ -73,3 +111,4 @@ else if (event.keyCode===40){
 }
 }
 document.addEventListener('keydown',control);
+//startButton.addEventListener('click'.startGame);
