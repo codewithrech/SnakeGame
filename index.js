@@ -8,7 +8,8 @@ let width=20;
 let appleIndex=0;
 let score=0;
 let intervalTime=1000;
-let speed =1;
+let speed =0.5;
+let timerId=0;
 function createGrid(){
     for(i=0; i<400; i++){
         const square=document.createElement('div');
@@ -21,8 +22,19 @@ function createGrid(){
 createGrid()
 console.log(squares);
 currentSnake.forEach(index=>squares[index].classList.add('snake'));
+
 function startGame() {
-timerId = setInterval(move, intervalTime)
+    currentSnake.forEach(index => squares[index].classList.remove('snake'))
+    squares[appleIndex].classList.remove('apple')
+    clearInterval(timerId)
+    currentSnake = [2,1,0]
+    score = 0
+    scoreDisplay.textContent = score
+    direction = 1
+    intervalTime = 1000
+    generateApple()
+    currentSnake.forEach(index => squares[index].classList.add('snake'))
+    timerId = setInterval(move, intervalTime)
 }
 function move(){
     if(
@@ -95,16 +107,16 @@ function control(event){
 else if(event.keyCode===38){
 console.log("up");
 direction=-width;
-}
-else if (event.keyCode===37){
-    console.log("left");
-    direction=-1;
+// }
+// else if (event.keyCode===37){
+//     console.log("left");
+//     direction=-1;
 
-}
-else if (event.keyCode===40){
-    console.log("down");
-    direction=+width;
-}
-}
-document.addEventListener('keydown',control);
-startButton.addEventListener('click', startGame)
+// }
+// else if (event.keyCode===40){
+//     console.log("down");
+//     direction=+width;
+// }
+// }
+// document.addEventListener('keydown',control);
+// startButton.addEventListener('click', startGame)
