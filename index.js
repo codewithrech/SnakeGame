@@ -107,16 +107,25 @@ function control(event){
 else if(event.keyCode===38){
 console.log("up");
 direction=-width;
-// }
-// else if (event.keyCode===37){
-//     console.log("left");
-//     direction=-1;
+}
+else if (event.keyCode===37){
+    console.log("left");
+    direction=-1;
 
-// }
-// else if (event.keyCode===40){
-//     console.log("down");
-//     direction=+width;
-// }
-// }
-// document.addEventListener('keydown',control);
-// startButton.addEventListener('click', startGame)
+}
+else if (event.keyCode===40){
+    console.log("down");
+    direction=+width;
+}
+}
+document.addEventListener('keydown',control);
+startButton.addEventListener('click', startGame)
+generateApples() 
+function control(event){
+    if(event.keyCode===39){
+    console.log("right");
+    direction=1;
+}
+else if(event.keyCode===38){
+console.log("up");
+direction=-width;
