@@ -121,11 +121,6 @@ else if (event.keyCode===40){
 document.addEventListener('keydown',control);
 startButton.addEventListener('click', startGame)
 generateApples() 
-function control(event){
-    if(event.keyCode===39){
-    console.log("right");
-    direction=1;
-}
-else if(event.keyCode===38){
-console.log("up");
-direction=-width;
+document .addEventListener('keyup',control);
+startButton.addEventListene('click',startGame)
+generateapple()
